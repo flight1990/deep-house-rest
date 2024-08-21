@@ -6,9 +6,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "kalnoy/nestedset": "^6.0",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.9"
+        "laravel/scout": "^10.11",
+        "laravel/tinker": "^2.9",
+        "spatie/laravel-sluggable": "^3.6"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

@@ -2,21 +2,17 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\PageRepositoryInterface;
+use App\Repositories\PageRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+        $this->app->bind(PageRepositoryInterface::class, PageRepository::class);
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         //

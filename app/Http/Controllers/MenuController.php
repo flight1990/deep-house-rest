@@ -9,7 +9,6 @@ use App\Actions\GetMenuAction;
 use App\Actions\UpdateMenuAction;
 use App\Http\Requests\CreateMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
-use App\Http\Resources\CategoryResource;
 use App\Http\Resources\MenuResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
@@ -57,7 +56,7 @@ class MenuController extends BaseController
             return $this->sendSimpleError('Menu item not found.');
         }
 
-        return $this->sendResponse(new CategoryResource($data));
+        return $this->sendResponse(new MenuResource($data));
     }
 
     public function destroy(int $id): JsonResponse

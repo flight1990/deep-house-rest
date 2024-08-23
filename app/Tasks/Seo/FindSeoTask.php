@@ -13,8 +13,12 @@ class FindSeoTask
     {
     }
 
-    public function run(int $id): Model
+    public function run(int|string $identifier): Model
     {
-        return $this->seoRepository->findById($id);
+        if (is_numeric($identifier)) {
+            return $this->seoRepository->findById($identifier);
+        }
+
+        return  $this->seoRepository->findByUrl($identifier);
     }
 }

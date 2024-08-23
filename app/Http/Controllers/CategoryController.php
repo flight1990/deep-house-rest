@@ -10,9 +10,10 @@ use App\Actions\UpdateCategoryAction;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CategoryController extends BaseController
 {
@@ -26,47 +27,33 @@ class CategoryController extends BaseController
     {
     }
 
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): ResourceCollection
     {
         $data = $this->getCategoriesAction->run($request->all());
-        return $this->sendResponse(CategoryResource::collection($data));
+        return $this->respondWithSuccess(CategoryResource::collection($data));
     }
 
-    public function show(int|string $identifier): JsonResponse
+    public function show(int|string $identifier): JsonResource
     {
-        try {
-            $data = $this->findCategoryAction->run($identifier);
-            return $this->sendResponse(new CategoryResource($data));
-        } catch (ModelNotFoundException $e) {
-            return $this->sendSimpleError('Category not found.');
-        }
+        $data = $this->findCategoryAction->run($identifier);
+        return $this->respondWithSuccess(new CategoryResource($data));
     }
 
-    public function store(CreateCategoryRequest $request): JsonResponse
+    public function store(CreateCategoryRequest $request): JsonResource
     {
         $data = $this->createCategoryAction->run($request->validated());
-        return $this->sendResponse(new CategoryResource($data), 'Category created.', 201);
+        return $this->respondWithSuccessCreate(new CategoryResource($data));
     }
 
-    public function update(UpdateCategoryRequest $request, int $id): JsonResponse
+    public function update(UpdateCategoryRequest $request, int $id): JsonResource
     {
-        try {
-            $data = $this->updateCategoryAction->run($request->validated(), $id);
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('Category not found.');
-        }
-
-        return $this->sendResponse(new CategoryResource($data));
+        $data = $this->updateCategoryAction->run($request->validated(), $id);
+        return $this->respondWithSuccess(new CategoryResource($data));
     }
 
     public function destroy(int $id): JsonResponse
     {
-        try {
-            $this->deleteCategoryAction->run($id);
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('Category not found.');
-        }
-
-        return $this->sendResponse(null, 'Category deleted.', 204);
+        $this->deleteCategoryAction->run($id);
+        return $this->noContent();
     }
 }

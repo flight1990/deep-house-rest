@@ -9,11 +9,11 @@ use App\Actions\GetSeoAction;
 use App\Actions\UpdateSeoAction;
 use App\Http\Requests\CreateSeoRequest;
 use App\Http\Requests\UpdateSeoRequest;
-use App\Http\Resources\MenuResource;
 use App\Http\Resources\SeoResource;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class SeoController extends BaseController
 {
@@ -27,47 +27,33 @@ class SeoController extends BaseController
     {
     }
 
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): ResourceCollection
     {
         $data = $this->getSeoAction->run($request->all());
-        return $this->sendResponse(SeoResource::collection($data));
+        return $this->respondWithSuccess(SeoResource::collection($data));
     }
 
-    public function show(int|string $identifier): JsonResponse
+    public function show(int|string $identifier): JsonResource
     {
-        try {
-            $data = $this->findSeoAction->run($identifier);
-            return $this->sendResponse(new SeoResource($data));
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('Seo not found.');
-        }
+        $data = $this->findSeoAction->run($identifier);
+        return $this->respondWithSuccess(new SeoResource($data));
     }
 
-    public function store(CreateSeoRequest $request): JsonResponse
+    public function store(CreateSeoRequest $request): JsonResource
     {
         $data = $this->createSeoAction->run($request->validated());
-        return $this->sendResponse(new SeoResource($data), 'Seo created.', 201);
+        return $this->respondWithSuccessCreate(new SeoResource($data));
     }
 
-    public function update(UpdateSeoRequest $request, int $id): JsonResponse
+    public function update(UpdateSeoRequest $request, int $id): JsonResource
     {
-        try {
-            $data = $this->updateSeoAction->run($request->validated(), $id);
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('Seo not found.');
-        }
-
-        return $this->sendResponse(new MenuResource($data));
+        $data = $this->updateSeoAction->run($request->validated(), $id);
+        return $this->respondWithSuccess(new SeoResource($data));
     }
 
     public function destroy(int $id): JsonResponse
     {
-        try {
-            $this->deleteSeoAction->run($id);
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('Seo not found.');
-        }
-
-        return $this->sendResponse(null, 'Seo deleted.', 204);
+        $this->deleteSeoAction->run($id);
+        return $this->noContent();
     }
 }

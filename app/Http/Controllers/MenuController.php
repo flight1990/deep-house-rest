@@ -10,9 +10,10 @@ use App\Actions\UpdateMenuAction;
 use App\Http\Requests\CreateMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use App\Http\Resources\MenuResource;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class MenuController extends BaseController
 {
@@ -26,47 +27,33 @@ class MenuController extends BaseController
     {
     }
 
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): ResourceCollection
     {
         $data = $this->getMenuAction->run($request->all());
-        return $this->sendResponse(MenuResource::collection($data));
+        return $this->respondWithSuccess(MenuResource::collection($data));
     }
 
-    public function show(int $id): JsonResponse
+    public function show(int $id): JsonResource
     {
-        try {
-            $data = $this->findMenuAction->run($id);
-            return $this->sendResponse(new MenuResource($data));
-        } catch (ModelNotFoundException $e) {
-            return $this->sendSimpleError('Menu item not found.');
-        }
+        $data = $this->findMenuAction->run($id);
+        return $this->respondWithSuccess(new MenuResource($data));
     }
 
-    public function store(CreateMenuRequest $request): JsonResponse
+    public function store(CreateMenuRequest $request): JsonResource
     {
         $data = $this->createMenuAction->run($request->validated());
-        return $this->sendResponse(new MenuResource($data), 'Menu item created.', 201);
+        return $this->respondWithSuccessCreate(new MenuResource($data));
     }
 
-    public function update(UpdateMenuRequest $request, int $id): JsonResponse
+    public function update(UpdateMenuRequest $request, int $id): JsonResource
     {
-        try {
-            $data = $this->updateMenuAction->run($request->validated(), $id);
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('Menu item not found.');
-        }
-
-        return $this->sendResponse(new MenuResource($data));
+        $data = $this->updateMenuAction->run($request->validated(), $id);
+        return $this->respondWithSuccess(new MenuResource($data));
     }
 
     public function destroy(int $id): JsonResponse
     {
-        try {
-            $this->deleteMenuAction->run($id);
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('Menu item not found.');
-        }
-
-        return $this->sendResponse(null, 'Menu item deleted.', 204);
+        $this->deleteMenuAction->run($id);
+        return $this->noContent();
     }
 }

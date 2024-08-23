@@ -3,37 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class BaseController extends Controller
 {
-    public function sendResponse($data, string $message = null, int $code = 200): JsonResponse
+    protected int $statusCode = 200;
+
+    public function getStatusCode(): int
     {
-        return response()->json([
-            'success' => true,
-            'message' => $message,
-            'data' => $data
-        ], $code);
+        return $this->statusCode;
     }
 
-    public function sendError(string $message, array $errors = [], int $code = 400): JsonResponse
+    public function respondWithSuccess($resource, string $message = 'success'): ResourceCollection|JsonResource
     {
-        $response = [
-            'success' => false,
-            'message' => $message
-        ];
-
-        if (!empty($errors)) {
-            $response['errors'] = $errors;
-        }
-
-        return response()->json($response, $code);
+        return $resource->additional(['message' => $message]);
     }
 
-    public function sendSimpleError(string $message, int $code = 404): JsonResponse
+    public function setStatusCode($statusCode): self
     {
-        return response()->json([
-            'success' => false,
+        $this->statusCode = $statusCode;
+        return $this;
+    }
+
+    public function respondWithSuccessCreate($resource, string $message = 'success')
+    {
+        return $this->setStatusCode(201)->respondWithArray([
+            'data' => $resource,
             'message' => $message
-        ], $code);
+        ]);
+    }
+
+    public function respondWithArray(array $array, array $headers = [], string $message = 'success')
+    {
+        $array = array_merge(['message' => $message], $array);
+        return response()->json($array, $this->statusCode, $headers);
+    }
+
+    public function noContent($status = 204): JsonResponse
+    {
+        return new JsonResponse(null, $status);
     }
 }

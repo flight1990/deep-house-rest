@@ -10,9 +10,10 @@ use App\Actions\UpdatePageAction;
 use App\Http\Requests\CreatePageRequest;
 use App\Http\Requests\UpdatePageRequest;
 use App\Http\Resources\PageResource;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class PageController extends BaseController
 {
@@ -26,47 +27,33 @@ class PageController extends BaseController
     {
     }
 
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): ResourceCollection
     {
         $data = $this->getPagesAction->run($request->all());
-        return $this->sendResponse(PageResource::collection($data));
+        return $this->respondWithSuccess(PageResource::collection($data));
     }
 
-    public function show(int|string $identifier): JsonResponse
+    public function show(int|string $identifier): JsonResource
     {
-        try {
-            $data = $this->findPageAction->run($identifier);
-            return $this->sendResponse(new PageResource($data));
-        } catch (ModelNotFoundException $e) {
-            return $this->sendSimpleError('Page not found.');
-        }
+        $data = $this->findPageAction->run($identifier);
+        return $this->respondWithSuccess(new PageResource($data));
     }
 
-    public function store(CreatePageRequest $request): JsonResponse
+    public function store(CreatePageRequest $request): JsonResource
     {
         $data = $this->createPageAction->run($request->validated());
-        return $this->sendResponse(new PageResource($data), 'Page created.', 201);
+        return $this->respondWithSuccessCreate(new PageResource($data));
     }
 
-    public function update(UpdatePageRequest $request, int $id): JsonResponse
+    public function update(UpdatePageRequest $request, int $id): JsonResource
     {
-        try {
-            $data = $this->updatePageAction->run($request->validated(), $id);
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('Page not found.');
-        }
-
-        return $this->sendResponse(new PageResource($data));
+        $data = $this->updatePageAction->run($request->validated(), $id);
+        return $this->respondWithSuccess(new PageResource($data));
     }
 
     public function destroy(int $id): JsonResponse
     {
-        try {
-            $this->deletePageAction->run($id);
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('Page not found.');
-        }
-
-        return $this->sendResponse(null, 'Page deleted.', 204);
+        $this->deletePageAction->run($id);
+        return $this->noContent();
     }
 }

@@ -16,9 +16,9 @@ class FindPageTask
     public function run(int|string $identifier): Model|null
     {
         if (is_numeric($identifier)) {
-            return $this->pageRepository->findBySlug($identifier);
+            return $this->pageRepository->findById($identifier);
         }
 
-        return $this->pageRepository->findById($identifier);
+        return $this->pageRepository->findBySlug($identifier);
     }
 }

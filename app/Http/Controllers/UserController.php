@@ -10,9 +10,10 @@ use App\Actions\UpdateUserAction;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserController extends BaseController
 {
@@ -26,47 +27,33 @@ class UserController extends BaseController
     {
     }
 
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): ResourceCollection
     {
         $data = $this->getUsersAction->run($request->all());
-        return $this->sendResponse(UserResource::collection($data));
+        return $this->respondWithSuccess(UserResource::collection($data));
     }
 
-    public function show(int|string $identifier): JsonResponse
+    public function show(int|string $identifier): JsonResource
     {
-        try {
-            $data = $this->findUserAction->run($identifier);
-            return $this->sendResponse(new UserResource($data));
-        } catch (ModelNotFoundException $e) {
-            return $this->sendSimpleError('User not found.');
-        }
+        $data = $this->findUserAction->run($identifier);
+        return $this->respondWithSuccess(new UserResource($data));
     }
 
-    public function store(CreateUserRequest $request): JsonResponse
+    public function store(CreateUserRequest $request): JsonResource
     {
         $data = $this->createUserAction->run($request->validated());
-        return $this->sendResponse(new UserResource($data), 'User created.', 201);
+        return $this->respondWithSuccessCreate(new UserResource($data));
     }
 
-    public function update(UpdateUserRequest $request, int $id): JsonResponse
+    public function update(UpdateUserRequest $request, int $id): JsonResource
     {
-        try {
-            $data = $this->updateUserAction->run($request->validated(), $id);
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('User not found.');
-        }
-
-        return $this->sendResponse(new UserResource($data));
+        $data = $this->updateUserAction->run($request->validated(), $id);
+        return $this->respondWithSuccess(new UserResource($data));
     }
 
     public function destroy(int $id): JsonResponse
     {
-        try {
-            $this->deleteUserAction->run($id);
-        } catch (ModelNotFoundException) {
-            return $this->sendSimpleError('User not found.');
-        }
-
-        return $this->sendResponse(null, 'User deleted.', 204);
+        $this->deleteUserAction->run($id);
+        return $this->noContent();
     }
 }

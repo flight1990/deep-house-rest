@@ -13,7 +13,7 @@ class FindMenuTask
     {
     }
 
-    public function run(int $id): Model|null
+    public function run(int $id): Model
     {
         return $this->menuRepository->findById($id);
     }

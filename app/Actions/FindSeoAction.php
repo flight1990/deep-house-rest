@@ -13,8 +13,8 @@ class FindSeoAction
     {
     }
 
-    public function run(int|string $identifier): Model|null
+    public function run(int $id): Model
     {
-        return $this->findSeoTask->run($identifier);
+        return $this->findSeoTask->run($id);
     }
 }

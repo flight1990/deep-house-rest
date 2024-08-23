@@ -13,7 +13,7 @@ class FindCategoryTask
     {
     }
 
-    public function run(int|string $identifier): Model|null
+    public function run(int|string $identifier): Model
     {
         if (is_numeric($identifier)) {
             return $this->categoryRepository->findById($identifier);

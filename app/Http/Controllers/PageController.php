@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\CreatePageAction;
-use App\Actions\DeletePageAction;
-use App\Actions\FindPageAction;
-use App\Actions\GetPagesAction;
-use App\Actions\UpdatePageAction;
-use App\Http\Requests\CreatePageRequest;
-use App\Http\Requests\UpdatePageRequest;
+use App\Actions\Pages\CreatePageAction;
+use App\Actions\Pages\DeletePageAction;
+use App\Actions\Pages\FindPageAction;
+use App\Actions\Pages\GetPagesAction;
+use App\Actions\Pages\UpdatePageAction;
+use App\Http\Requests\Pages\CreatePageRequest;
+use App\Http\Requests\Pages\UpdatePageRequest;
 use App\Http\Resources\PageResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class PageController extends BaseController
         return $this->respondWithSuccess(new PageResource($data));
     }
 
-    public function store(CreatePageRequest $request): JsonResource
+    public function store(CreatePageRequest $request): JsonResponse
     {
         $data = $this->createPageAction->run($request->validated());
         return $this->respondWithSuccessCreate(new PageResource($data));

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\CreateMenuAction;
-use App\Actions\DeleteMenuAction;
-use App\Actions\FindMenuAction;
-use App\Actions\GetMenuAction;
-use App\Actions\UpdateMenuAction;
-use App\Http\Requests\CreateMenuRequest;
-use App\Http\Requests\UpdateMenuRequest;
+use App\Actions\Menu\CreateMenuAction;
+use App\Actions\Menu\DeleteMenuAction;
+use App\Actions\Menu\FindMenuAction;
+use App\Actions\Menu\GetMenuAction;
+use App\Actions\Menu\UpdateMenuAction;
+use App\Http\Requests\Menu\CreateMenuRequest;
+use App\Http\Requests\Menu\UpdateMenuRequest;
 use App\Http\Resources\MenuResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class MenuController extends BaseController
         return $this->respondWithSuccess(new MenuResource($data));
     }
 
-    public function store(CreateMenuRequest $request): JsonResource
+    public function store(CreateMenuRequest $request): JsonResponse
     {
         $data = $this->createMenuAction->run($request->validated());
         return $this->respondWithSuccessCreate(new MenuResource($data));

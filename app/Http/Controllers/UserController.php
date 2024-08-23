@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\CreateUserAction;
-use App\Actions\DeleteUserAction;
-use App\Actions\FindUserAction;
-use App\Actions\GetUsersAction;
-use App\Actions\UpdateUserAction;
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Actions\Users\CreateUserAction;
+use App\Actions\Users\DeleteUserAction;
+use App\Actions\Users\FindUserAction;
+use App\Actions\Users\GetUsersAction;
+use App\Actions\Users\UpdateUserAction;
+use App\Http\Requests\Users\CreateUserRequest;
+use App\Http\Requests\Users\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class UserController extends BaseController
         return $this->respondWithSuccess(new UserResource($data));
     }
 
-    public function store(CreateUserRequest $request): JsonResource
+    public function store(CreateUserRequest $request): JsonResponse
     {
         $data = $this->createUserAction->run($request->validated());
         return $this->respondWithSuccessCreate(new UserResource($data));

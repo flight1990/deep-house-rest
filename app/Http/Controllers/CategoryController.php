@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\CreateCategoryAction;
-use App\Actions\DeleteCategoryAction;
-use App\Actions\FindCategoryAction;
-use App\Actions\GetCategoriesAction;
-use App\Actions\UpdateCategoryAction;
-use App\Http\Requests\CreateCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
+use App\Actions\Categories\CreateCategoryAction;
+use App\Actions\Categories\DeleteCategoryAction;
+use App\Actions\Categories\FindCategoryAction;
+use App\Actions\Categories\GetCategoriesAction;
+use App\Actions\Categories\UpdateCategoryAction;
+use App\Http\Requests\Categories\CreateCategoryRequest;
+use App\Http\Requests\Categories\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class CategoryController extends BaseController
         return $this->respondWithSuccess(new CategoryResource($data));
     }
 
-    public function store(CreateCategoryRequest $request): JsonResource
+    public function store(CreateCategoryRequest $request): JsonResponse
     {
         $data = $this->createCategoryAction->run($request->validated());
         return $this->respondWithSuccessCreate(new CategoryResource($data));

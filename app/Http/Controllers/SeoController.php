@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\CreateSeoAction;
-use App\Actions\DeleteSeoAction;
-use App\Actions\FindSeoAction;
-use App\Actions\GetSeoAction;
-use App\Actions\UpdateSeoAction;
-use App\Http\Requests\CreateSeoRequest;
-use App\Http\Requests\UpdateSeoRequest;
+use App\Actions\Seo\CreateSeoAction;
+use App\Actions\Seo\DeleteSeoAction;
+use App\Actions\Seo\FindSeoAction;
+use App\Actions\Seo\GetSeoAction;
+use App\Actions\Seo\UpdateSeoAction;
+use App\Http\Requests\Seo\CreateSeoRequest;
+use App\Http\Requests\Seo\UpdateSeoRequest;
 use App\Http\Resources\SeoResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class SeoController extends BaseController
         return $this->respondWithSuccess(new SeoResource($data));
     }
 
-    public function store(CreateSeoRequest $request): JsonResource
+    public function store(CreateSeoRequest $request): JsonResponse
     {
         $data = $this->createSeoAction->run($request->validated());
         return $this->respondWithSuccessCreate(new SeoResource($data));

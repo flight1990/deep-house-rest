@@ -13,7 +13,7 @@ class CreateTokenAction
     {
     }
 
-    public function run(Model $user): string
+    public function run($user): string
     {
         return $this->createTokenTask->run($user);
     }

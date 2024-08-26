@@ -40,6 +40,26 @@ class BaseController extends Controller
         return response()->json($array, $this->statusCode, $headers);
     }
 
+    public function respondWithMessage(string $message, int $code = 200)
+    {
+        return $this->setStatusCode($code)->respondWithArray([
+            'message' => $message
+        ]);
+    }
+
+    protected function respondWithError(string $message, array $errors = [])
+    {
+        $response = [
+            'message' => $message
+        ];
+
+        if (!empty($errors)) {
+            $response['errors'] = $errors;
+        }
+
+        return $this->respondWithArray($response);
+    }
+
     public function noContent($status = 204): JsonResponse
     {
         return new JsonResponse(null, $status);

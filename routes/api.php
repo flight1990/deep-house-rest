@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
@@ -11,6 +12,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::post('register', [RegisterController::class, 'register']);
+
+    Route::controller(LoginController::class)->group(function () {
+        Route::post('login', 'login');
+
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::post('logout', 'logout');
+            Route::get('user', 'user');
+        });
+    });
+
     Route::apiResource('pages', PageController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('categories', CategoryController::class);

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Actions\Pages\CreatePageAction;
 use App\Actions\Pages\DeletePageAction;
 use App\Actions\Pages\FindPageAction;
 use App\Actions\Pages\GetPagesAction;
 use App\Actions\Pages\UpdatePageAction;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Pages\CreatePageRequest;
 use App\Http\Requests\Pages\UpdatePageRequest;
 use App\Http\Resources\PageResource;
@@ -33,9 +34,9 @@ class PageController extends BaseController
         return $this->respondWithSuccess(PageResource::collection($data));
     }
 
-    public function show(int|string $identifier): JsonResource
+    public function show(int $id): JsonResource
     {
-        $data = $this->findPageAction->run($identifier);
+        $data = $this->findPageAction->run($id);
         return $this->respondWithSuccess(new PageResource($data));
     }
 

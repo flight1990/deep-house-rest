@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Actions\Categories\CreateCategoryAction;
 use App\Actions\Categories\DeleteCategoryAction;
 use App\Actions\Categories\FindCategoryAction;
 use App\Actions\Categories\GetCategoriesAction;
 use App\Actions\Categories\UpdateCategoryAction;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Categories\CreateCategoryRequest;
 use App\Http\Requests\Categories\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
@@ -33,9 +34,9 @@ class CategoryController extends BaseController
         return $this->respondWithSuccess(CategoryResource::collection($data));
     }
 
-    public function show(int|string $identifier): JsonResource
+    public function show(int $id): JsonResource
     {
-        $data = $this->findCategoryAction->run($identifier);
+        $data = $this->findCategoryAction->run($id);
         return $this->respondWithSuccess(new CategoryResource($data));
     }
 

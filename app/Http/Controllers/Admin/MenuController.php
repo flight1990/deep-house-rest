@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Actions\Menu\CreateMenuAction;
 use App\Actions\Menu\DeleteMenuAction;
 use App\Actions\Menu\FindMenuAction;
 use App\Actions\Menu\GetMenuAction;
 use App\Actions\Menu\UpdateMenuAction;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Menu\CreateMenuRequest;
 use App\Http\Requests\Menu\UpdateMenuRequest;
 use App\Http\Resources\MenuResource;

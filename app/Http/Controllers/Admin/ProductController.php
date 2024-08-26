@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Actions\Products\CreateProductAction;
 use App\Actions\Products\DeleteProductAction;
 use App\Actions\Products\FindProductAction;
 use App\Actions\Products\GetProductsAction;
 use App\Actions\Products\UpdateProductAction;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Products\CreateProductRequest;
 use App\Http\Requests\Products\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
@@ -33,9 +34,9 @@ class ProductController extends BaseController
         return $this->respondWithSuccess(ProductResource::collection($data));
     }
 
-    public function show(int|string $identifier): JsonResource
+    public function show(int $id): JsonResource
     {
-        $data = $this->findProductAction->run($identifier);
+        $data = $this->findProductAction->run($id);
         return $this->respondWithSuccess(new ProductResource($data));
     }
 

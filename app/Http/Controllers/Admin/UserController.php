@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Actions\Users\CreateUserAction;
 use App\Actions\Users\DeleteUserAction;
 use App\Actions\Users\FindUserAction;
 use App\Actions\Users\GetUsersAction;
 use App\Actions\Users\UpdateUserAction;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Users\CreateUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
 use App\Http\Resources\UserResource;

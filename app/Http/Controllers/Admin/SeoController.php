@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Actions\Seo\CreateSeoAction;
 use App\Actions\Seo\DeleteSeoAction;
 use App\Actions\Seo\FindSeoAction;
 use App\Actions\Seo\GetSeoAction;
 use App\Actions\Seo\UpdateSeoAction;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Seo\CreateSeoRequest;
 use App\Http\Requests\Seo\UpdateSeoRequest;
 use App\Http\Resources\SeoResource;
@@ -33,9 +34,9 @@ class SeoController extends BaseController
         return $this->respondWithSuccess(SeoResource::collection($data));
     }
 
-    public function show(int|string $identifier): JsonResource
+    public function show(int $id): JsonResource
     {
-        $data = $this->findSeoAction->run($identifier);
+        $data = $this->findSeoAction->run($id);
         return $this->respondWithSuccess(new SeoResource($data));
     }
 

@@ -16,9 +16,9 @@ class FindProductTask
     public function run(int|string $identifier): Model
     {
         if (is_numeric($identifier)) {
-            return $this->productRepository->findBySlug($identifier);
+            return $this->productRepository->findById($identifier);
         }
 
-        return $this->productRepository->findById($identifier);
+        return $this->productRepository->findBySlug($identifier);
     }
 }

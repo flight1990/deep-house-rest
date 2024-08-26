@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Actions\Users\CreateTokenAction;
 use App\Actions\Users\GetAuthUserAction;
+use App\Http\Controllers\BaseController;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

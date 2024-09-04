@@ -15,6 +15,7 @@ class GetCategoriesAction
 
     public function run(array $params = []): Collection
     {
-        return $this->getCategoriesTask->run()->toTree();
+        return $this->getCategoriesTask->run($params['id'] ?? null)
+            ->toTree();
     }
 }

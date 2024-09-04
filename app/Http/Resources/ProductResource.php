@@ -17,6 +17,7 @@ class ProductResource extends JsonResource
             'slug' => $this->whenHas('slug'),
             'description' => $this->whenHas('description'),
             'price' => $this->whenHas('price'),
+            'category_id' => $this->whenHas('category_id'),
             'category' => new CategoryResource($this->whenLoaded('category'))
         ];
     }

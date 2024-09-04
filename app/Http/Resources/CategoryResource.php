@@ -15,6 +15,7 @@ class CategoryResource extends JsonResource
             'id' => $this->whenHas('id'),
             'name' => $this->whenHas('name'),
             'slug' => $this->whenHas('slug'),
+            'parent_id' => $this->whenHas('parent_id'),
             'children' => CategoryResource::collection($this->whenLoaded('children'))
         ];
     }

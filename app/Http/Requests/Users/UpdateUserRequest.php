@@ -15,7 +15,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['sometimes', 'string', 'max:255'],
-            'email' => ['sometimes', 'max:255', 'email', 'unique:users,email,'.$this['id']],
+            'email' => ['sometimes', 'max:255', 'email', 'unique:users,email,'.$this['user']],
             'password' => ['sometimes', 'max:255', 'string', 'confirmed']
         ];
     }

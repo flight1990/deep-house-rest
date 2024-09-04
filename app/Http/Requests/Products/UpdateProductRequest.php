@@ -17,7 +17,7 @@ class UpdateProductRequest extends FormRequest
             'name' => ['sometimes', 'string', 'max:255'],
             'description' => ['sometimes', 'max:65000'],
             'price' => ['sometimes', 'numeric'],
-            'category_id' => ['sometimes', 'exist:categories']
+            'category_id' => ['sometimes', 'integer', 'exists:categories,id']
         ];
     }
 }

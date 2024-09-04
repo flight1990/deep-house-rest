@@ -15,6 +15,7 @@ class GetMenuAction
 
     public function run(array $params = []): Collection
     {
-        return $this->getMenuTask->run()->toTree();
+        return $this->getMenuTask->run($params['id'] ?? null)
+            ->toTree();
     }
 }

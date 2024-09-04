@@ -13,8 +13,8 @@ class GetCategoriesTask
     {
     }
 
-    public function run(): Collection
+    public function run(int $id = null): Collection
     {
-        return $this->categoryRepository->all();
+        return $this->categoryRepository->all($id);
     }
 }

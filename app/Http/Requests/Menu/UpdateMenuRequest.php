@@ -16,7 +16,7 @@ class UpdateMenuRequest extends FormRequest
         return [
             'name' => ['sometimes', 'string', 'max:255'],
             'url' => ['sometimes', 'url', 'max:255'],
-            'parent_id' => ['sometimes', 'integer', 'exist:menu']
+            'parent_id' => ['nullable', 'integer', 'exists:menu,id']
         ];
     }
 }

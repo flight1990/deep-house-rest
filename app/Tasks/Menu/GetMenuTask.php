@@ -13,8 +13,8 @@ class GetMenuTask
     {
     }
 
-    public function run(): Collection
+    public function run(int $id = null): Collection
     {
-        return $this->menuRepository->all();
+        return $this->menuRepository->all($id);
     }
 }

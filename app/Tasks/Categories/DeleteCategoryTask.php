@@ -7,13 +7,13 @@ use App\Repositories\Contracts\CategoryRepositoryInterface;
 class DeleteCategoryTask
 {
     public function __construct(
-        protected CategoryRepositoryInterface $categoryRepository
+        protected CategoryRepositoryInterface $repository
     )
     {
     }
 
     public function run(int $id): bool
     {
-        return $this->categoryRepository->delete($id);
+        return $this->repository->delete($id);
     }
 }

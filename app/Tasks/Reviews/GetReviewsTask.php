@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tasks\Users;
+namespace App\Tasks\Reviews;
 
-use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Contracts\ReviewRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class GetUsersTask
+class GetReviewsTask
 {
     public function __construct(
-        protected UserRepositoryInterface $repository
+        protected ReviewRepositoryInterface $repository
     )
     {
     }

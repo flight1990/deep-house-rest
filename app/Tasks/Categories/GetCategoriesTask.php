@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Collection;
 class GetCategoriesTask
 {
     public function __construct(
-        protected CategoryRepositoryInterface $categoryRepository
+        protected CategoryRepositoryInterface $repository
     )
     {
     }
 
     public function run(int $id = null): Collection
     {
-        return $this->categoryRepository->all($id);
+        return $this->repository->all($id);
     }
 }

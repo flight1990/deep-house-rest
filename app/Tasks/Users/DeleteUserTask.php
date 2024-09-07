@@ -7,13 +7,13 @@ use App\Repositories\Contracts\UserRepositoryInterface;
 class DeleteUserTask
 {
     public function __construct(
-        protected UserRepositoryInterface $userRepository
+        protected UserRepositoryInterface $repository
     )
     {
     }
 
     public function run(int $id): bool
     {
-        return $this->userRepository->delete($id);
+        return $this->repository->delete($id);
     }
 }

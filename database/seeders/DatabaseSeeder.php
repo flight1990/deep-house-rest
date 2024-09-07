@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             PageSeeder::class,
             MenuSeeder::class,
-            SeoSeeder::class
+            SeoSeeder::class,
+            ProductSeeder::class,
+            ReviewSeeder::class
         ]);
     }
 }

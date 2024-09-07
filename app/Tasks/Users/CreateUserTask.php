@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class CreateUserTask
 {
     public function __construct(
-        protected UserRepositoryInterface $userRepository
+        protected UserRepositoryInterface $repository
     )
     {
     }
 
     public function run(array $payload): Model
     {
-        return $this->userRepository->create($payload);
+        return $this->repository->create($payload);
     }
 }

@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class UpdateCategoryTask
 {
     public function __construct(
-        protected CategoryRepositoryInterface $categoryRepository
+        protected CategoryRepositoryInterface $repository
     )
     {
     }
 
     public function run(array $payload, int $id): Model
     {
-        return $this->categoryRepository->update($payload, $id);
+        return $this->repository->update($payload, $id);
     }
 }

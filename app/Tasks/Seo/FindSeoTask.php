@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FindSeoTask
 {
     public function __construct(
-        protected SeoRepositoryInterface $seoRepository
+        protected SeoRepositoryInterface $repository
     )
     {
     }
@@ -16,9 +16,9 @@ class FindSeoTask
     public function run(int|string $identifier): Model
     {
         if (is_numeric($identifier)) {
-            return $this->seoRepository->findById($identifier);
+            return $this->repository->findById($identifier);
         }
 
-        return  $this->seoRepository->findByUrl($identifier);
+        return  $this->repository->findByUrl($identifier);
     }
 }

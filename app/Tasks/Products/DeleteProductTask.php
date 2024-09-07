@@ -7,13 +7,13 @@ use App\Repositories\Contracts\ProductRepositoryInterface;
 class DeleteProductTask
 {
     public function __construct(
-        protected ProductRepositoryInterface $productRepository
+        protected ProductRepositoryInterface $repository
     )
     {
     }
 
     public function run(int $id): bool
     {
-        return $this->productRepository->delete($id);
+        return $this->repository->delete($id);
     }
 }

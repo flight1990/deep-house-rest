@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class UpdateSeoTask
 {
     public function __construct(
-        protected SeoRepositoryInterface $seoRepository
+        protected SeoRepositoryInterface $repository
     )
     {
     }
 
     public function run(array $payload, int $id): Model
     {
-        return $this->seoRepository->update($payload, $id);
+        return $this->repository->update($payload, $id);
     }
 }

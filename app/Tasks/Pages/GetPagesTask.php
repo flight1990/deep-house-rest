@@ -8,13 +8,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class GetPagesTask
 {
     public function __construct(
-        protected PageRepositoryInterface $pageRepository
+        protected PageRepositoryInterface $repository
     )
     {
     }
 
     public function run(int $limit = 15): LengthAwarePaginator
     {
-        return $this->pageRepository->paginate($limit);
+        return $this->repository->paginate($limit);
     }
 }

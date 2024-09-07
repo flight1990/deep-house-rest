@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class UpdatePageTask
 {
     public function __construct(
-        protected PageRepositoryInterface $pageRepository
+        protected PageRepositoryInterface $repository
     )
     {
     }
 
     public function run(array $payload, int $id): Model
     {
-        return $this->pageRepository->update($payload, $id);
+        return $this->repository->update($payload, $id);
     }
 }

@@ -8,13 +8,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class GetSeoTask
 {
     public function __construct(
-        protected SeoRepositoryInterface $seoRepository
+        protected SeoRepositoryInterface $repository
     )
     {
     }
 
     public function run(int $limit = 15): LengthAwarePaginator
     {
-        return $this->seoRepository->paginate($limit);
+        return $this->repository->paginate($limit);
     }
 }

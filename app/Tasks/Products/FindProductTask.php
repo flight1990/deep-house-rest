@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FindProductTask
 {
     public function __construct(
-        protected ProductRepositoryInterface $productRepository
+        protected ProductRepositoryInterface $repository
     )
     {
     }
@@ -16,9 +16,9 @@ class FindProductTask
     public function run(int|string $identifier): Model
     {
         if (is_numeric($identifier)) {
-            return $this->productRepository->findById($identifier);
+            return $this->repository->findById($identifier);
         }
 
-        return $this->productRepository->findBySlug($identifier);
+        return $this->repository->findBySlug($identifier);
     }
 }

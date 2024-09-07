@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class CreateProductTask
 {
     public function __construct(
-        protected ProductRepositoryInterface $productRepository
+        protected ProductRepositoryInterface $repository
     )
     {
     }
 
     public function run(array $payload): Model
     {
-        return $this->productRepository->create($payload);
+        return $this->repository->create($payload);
     }
 }

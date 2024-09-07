@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class FindMenuTask
 {
     public function __construct(
-        protected MenuRepositoryInterface $menuRepository
+        protected MenuRepositoryInterface $repository
     )
     {
     }
 
     public function run(int $id): Model
     {
-        return $this->menuRepository->findById($id);
+        return $this->repository->findById($id);
     }
 }

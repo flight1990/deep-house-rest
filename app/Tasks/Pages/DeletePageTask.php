@@ -7,13 +7,13 @@ use App\Repositories\Contracts\PageRepositoryInterface;
 class DeletePageTask
 {
     public function __construct(
-        protected PageRepositoryInterface $pageRepository
+        protected PageRepositoryInterface $repository
     )
     {
     }
 
     public function run(int $id): bool
     {
-        return $this->pageRepository->delete($id);
+        return $this->repository->delete($id);
     }
 }

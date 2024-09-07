@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class UpdateMenuTask
 {
     public function __construct(
-        protected MenuRepositoryInterface $menuRepository
+        protected MenuRepositoryInterface $repository
     )
     {
     }
 
     public function run(array $payload, int $id): Model
     {
-        return $this->menuRepository->update($payload, $id);
+        return $this->repository->update($payload, $id);
     }
 }

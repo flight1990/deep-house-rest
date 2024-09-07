@@ -34,9 +34,9 @@ class UserController extends BaseController
         return $this->respondWithSuccess(UserResource::collection($data));
     }
 
-    public function show(int|string $identifier): JsonResource
+    public function show(int $id): JsonResource
     {
-        $data = $this->findUserAction->run($identifier);
+        $data = $this->findUserAction->run($id);
         return $this->respondWithSuccess(new UserResource($data));
     }
 

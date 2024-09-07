@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tasks\Pages;
+namespace App\Tasks\Reviews;
 
-use App\Repositories\Contracts\PageRepositoryInterface;
+use App\Repositories\Contracts\ReviewRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class CreatePageTask
+class CreateReviewTask
 {
     public function __construct(
-        protected PageRepositoryInterface $repository
+        protected ReviewRepositoryInterface $repository
     )
     {
     }

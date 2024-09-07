@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FindPageTask
 {
     public function __construct(
-        protected PageRepositoryInterface $pageRepository
+        protected PageRepositoryInterface $repository
     )
     {
     }
@@ -16,9 +16,9 @@ class FindPageTask
     public function run(int|string $identifier): Model|null
     {
         if (is_numeric($identifier)) {
-            return $this->pageRepository->findById($identifier);
+            return $this->repository->findById($identifier);
         }
 
-        return $this->pageRepository->findBySlug($identifier);
+        return $this->repository->findBySlug($identifier);
     }
 }

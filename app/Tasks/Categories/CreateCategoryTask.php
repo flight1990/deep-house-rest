@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class CreateCategoryTask
 {
     public function __construct(
-        protected CategoryRepositoryInterface $categoryRepository
+        protected CategoryRepositoryInterface $repository
     )
     {
     }
 
     public function run(array $payload): Model
     {
-        return $this->categoryRepository->create($payload);
+        return $this->repository->create($payload);
     }
 }

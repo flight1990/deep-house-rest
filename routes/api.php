@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -33,6 +34,7 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('admin')->group(function () {
+        Route::apiResource('reviews', AdminReviewController::class);
         Route::apiResource('categories', AdminCategoryController::class);
         Route::apiResource('pages', AdminPageController::class);
         Route::apiResource('users', AdminUserController::class);

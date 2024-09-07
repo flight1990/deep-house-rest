@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class UpdateProductTask
 {
     public function __construct(
-        protected ProductRepositoryInterface $productRepository
+        protected ProductRepositoryInterface $repository
     )
     {
     }
 
     public function run(array $payload, int $id): Model
     {
-        return $this->productRepository->update($payload, $id);
+        return $this->repository->update($payload, $id);
     }
 }

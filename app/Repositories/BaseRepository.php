@@ -16,7 +16,7 @@ class BaseRepository implements Contracts\BaseRepositoryInterface
 
     public function paginate(int $limit = 15): LengthAwarePaginator
     {
-        return $this->model->paginate();
+        return $this->model->paginate($limit);
     }
 
     public function all(): Collection

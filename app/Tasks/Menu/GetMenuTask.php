@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Collection;
 class GetMenuTask
 {
     public function __construct(
-        protected MenuRepositoryInterface $menuRepository
+        protected MenuRepositoryInterface $repository
     )
     {
     }
 
     public function run(int $id = null): Collection
     {
-        return $this->menuRepository->all($id);
+        return $this->repository->all($id);
     }
 }

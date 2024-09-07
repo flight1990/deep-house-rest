@@ -8,13 +8,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class GetProductsTask
 {
     public function __construct(
-        protected ProductRepositoryInterface $productRepository
+        protected ProductRepositoryInterface $repository
     )
     {
     }
 
     public function run(int $limit = 15): LengthAwarePaginator
     {
-        return $this->productRepository->paginate($limit);
+        return $this->repository->paginate($limit);
     }
 }

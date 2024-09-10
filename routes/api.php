@@ -55,6 +55,7 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::controller(GuestPageController::class)->prefix('pages')->group(function () {
+        Route::get('/', 'index');
         Route::get('/{slug}', 'show');
     });
 

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Guest;
 use App\Actions\Products\FindProductAction;
 use App\Actions\Products\GetProductsAction;
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\Products\GetProductsRequest;
 use App\Http\Resources\ProductResource;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -19,9 +19,9 @@ class ProductController extends BaseController
     {
     }
 
-    public function index(Request $request): ResourceCollection
+    public function index(GetProductsRequest $request): ResourceCollection
     {
-        $data = $this->getProductsAction->run($request->all());
+        $data = $this->getProductsAction->run($request->validated());
         return $this->respondWithSuccess(ProductResource::collection($data));
     }
 

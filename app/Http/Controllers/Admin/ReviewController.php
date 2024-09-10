@@ -10,9 +10,9 @@ use App\Actions\Reviews\UpdateReviewAction;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Reviews\CreateReviewRequest;
 use App\Http\Requests\Reviews\UpdateReviewRequest;
+use App\Http\Requests\Reviews\GetReviewsRequest;
 use App\Http\Resources\ReviewResource;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -28,9 +28,9 @@ class ReviewController extends BaseController
     {
     }
 
-    public function index(Request $request): ResourceCollection
+    public function index(GetReviewsRequest $request): ResourceCollection
     {
-        $data = $this->getReviewsAction->run($request->all());
+        $data = $this->getReviewsAction->run($request->validated());
         return $this->respondWithSuccess(ReviewResource::collection($data));
     }
 

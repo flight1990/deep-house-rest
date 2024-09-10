@@ -9,10 +9,10 @@ use App\Actions\Pages\GetPagesAction;
 use App\Actions\Pages\UpdatePageAction;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Pages\CreatePageRequest;
+use App\Http\Requests\Pages\GetPagesRequest;
 use App\Http\Requests\Pages\UpdatePageRequest;
 use App\Http\Resources\PageResource;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -28,9 +28,9 @@ class PageController extends BaseController
     {
     }
 
-    public function index(Request $request): ResourceCollection
+    public function index(GetPagesRequest $request): ResourceCollection
     {
-        $data = $this->getPagesAction->run($request->all());
+        $data = $this->getPagesAction->run($request->validated());
         return $this->respondWithSuccess(PageResource::collection($data));
     }
 

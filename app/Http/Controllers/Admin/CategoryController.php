@@ -10,9 +10,9 @@ use App\Actions\Categories\UpdateCategoryAction;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Categories\CreateCategoryRequest;
 use App\Http\Requests\Categories\UpdateCategoryRequest;
+use App\Http\Requests\Categories\GetCategoriesRequest;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -28,9 +28,9 @@ class CategoryController extends BaseController
     {
     }
 
-    public function index(Request $request): ResourceCollection
+    public function index(GetCategoriesRequest $request): ResourceCollection
     {
-        $data = $this->getCategoriesAction->run($request->all());
+        $data = $this->getCategoriesAction->run($request->validated());
         return $this->respondWithSuccess(CategoryResource::collection($data));
     }
 

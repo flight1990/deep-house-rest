@@ -9,10 +9,10 @@ use App\Actions\Users\GetUsersAction;
 use App\Actions\Users\UpdateUserAction;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Users\CreateUserRequest;
+use App\Http\Requests\Users\GetUsersRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -28,9 +28,9 @@ class UserController extends BaseController
     {
     }
 
-    public function index(Request $request): ResourceCollection
+    public function index(GetUsersRequest $request): ResourceCollection
     {
-        $data = $this->getUsersAction->run($request->all());
+        $data = $this->getUsersAction->run($request->validated());
         return $this->respondWithSuccess(UserResource::collection($data));
     }
 

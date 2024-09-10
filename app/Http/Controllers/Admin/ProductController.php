@@ -9,10 +9,10 @@ use App\Actions\Products\GetProductsAction;
 use App\Actions\Products\UpdateProductAction;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Products\CreateProductRequest;
+use App\Http\Requests\Products\GetProductsRequest;
 use App\Http\Requests\Products\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -28,9 +28,9 @@ class ProductController extends BaseController
     {
     }
 
-    public function index(Request $request): ResourceCollection
+    public function index(GetProductsRequest $request): ResourceCollection
     {
-        $data = $this->getProductsAction->run($request->all());
+        $data = $this->getProductsAction->run($request->validated());
         return $this->respondWithSuccess(ProductResource::collection($data));
     }
 

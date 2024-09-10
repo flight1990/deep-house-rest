@@ -9,10 +9,10 @@ use App\Actions\Seo\GetSeoAction;
 use App\Actions\Seo\UpdateSeoAction;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Seo\CreateSeoRequest;
+use App\Http\Requests\Seo\GetSeoRequest;
 use App\Http\Requests\Seo\UpdateSeoRequest;
 use App\Http\Resources\SeoResource;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -28,9 +28,9 @@ class SeoController extends BaseController
     {
     }
 
-    public function index(Request $request): ResourceCollection
+    public function index(GetSeoRequest $request): ResourceCollection
     {
-        $data = $this->getSeoAction->run($request->all());
+        $data = $this->getSeoAction->run($request->validated());
         return $this->respondWithSuccess(SeoResource::collection($data));
     }
 

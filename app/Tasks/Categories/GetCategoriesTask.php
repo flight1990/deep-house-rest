@@ -2,7 +2,7 @@
 
 namespace App\Tasks\Categories;
 
-use App\Criteria\WhereNotInCriteriaCriteria;
+use App\Criteria\WhereNotInCriteria;
 use App\L5Repository\CategoryRepository;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -21,7 +21,7 @@ class GetCategoriesTask
 
     public function byExceptId(?array $data = []): self
     {
-        $this->repository->pushCriteria(new WhereNotInCriteriaCriteria('id', $data));
+        $this->repository->pushCriteria(new WhereNotInCriteria('id', $data));
         return $this;
     }
 }

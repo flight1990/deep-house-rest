@@ -3,7 +3,7 @@
 namespace App\Tasks\Menu;
 
 use App\L5Repository\MenuRepository;
-use App\Criteria\WhereNotInCriteriaCriteria;
+use App\Criteria\WhereNotInCriteria;
 use Illuminate\Database\Eloquent\Collection;
 
 class GetMenuTask
@@ -21,7 +21,7 @@ class GetMenuTask
 
     public function byExceptId(?array $data = []): self
     {
-        $this->repository->pushCriteria(new WhereNotInCriteriaCriteria('id', $data));
+        $this->repository->pushCriteria(new WhereNotInCriteria('id', $data));
         return $this;
     }
 }

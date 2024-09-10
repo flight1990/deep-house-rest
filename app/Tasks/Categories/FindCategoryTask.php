@@ -2,6 +2,7 @@
 
 namespace App\Tasks\Categories;
 
+use App\Criteria\WhereFieldCriteria;
 use App\L5Repository\CategoryRepository;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +20,8 @@ class FindCategoryTask
             return $this->repository->find($identifier);
         }
 
-        return $this->repository->findByField('slug', $identifier);
+        return $this->repository
+            ->pushCriteria(new WhereFieldCriteria('slug', $identifier))
+            ->firstOrFail();
     }
 }

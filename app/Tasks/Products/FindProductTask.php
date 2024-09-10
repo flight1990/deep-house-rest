@@ -2,6 +2,7 @@
 
 namespace App\Tasks\Products;
 
+use App\Criteria\WhereFieldCriteria;
 use App\L5Repository\ProductRepository;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +20,8 @@ class FindProductTask
             return $this->repository->find($identifier);
         }
 
-        return $this->repository->findByField('slug', $identifier);
+        return $this->repository
+            ->pushCriteria(new WhereFieldCriteria('slug', $identifier))
+            ->firstOrFail();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Tasks\Pages;
 
+use App\Criteria\WhereFieldCriteria;
 use App\L5Repository\PageRepository;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +20,8 @@ class FindPageTask
             return $this->repository->find($identifier);
         }
 
-        return $this->repository->findByField('slug', $identifier);
+        return $this->repository
+            ->pushCriteria(new WhereFieldCriteria('slug', $identifier))
+            ->firstOrFail();
     }
 }

@@ -14,8 +14,6 @@ class ApiExceptionHandler
 {
     public function handle(Throwable $exception): JsonResponse
     {
-        dd($exception);
-
         $status = $this->determineStatusCode($exception);
         $message = $this->determineMessage($exception);
         $errors = $this->determineErrors($exception);

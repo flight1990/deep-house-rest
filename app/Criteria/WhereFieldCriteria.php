@@ -5,21 +5,21 @@ namespace App\Criteria;
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
-class WhereNotInCriteriaCriteria implements CriteriaInterface
+class WhereFieldCriteria implements CriteriaInterface
 {
     protected ?string $filed;
-    protected ?array $data = [];
+    protected ?string $value;
 
-    public function __construct(string $field, array $data = [])
+    public function __construct(?string $field, ?string $value)
     {
         $this->filed = $field;
-        $this->data = $data;
+        $this->value = $value;
     }
 
     public function apply($model, RepositoryInterface $repository)
     {
-        if (!is_null($this->filed) && !empty($this->data)) {
-            $model = $model->whereNotIn($this->filed, $this->data);
+        if (!is_null($this->filed) && !is_null($this->value)) {
+            $model = $model->where($this->filed, $this->value);
         }
 
         return $model;

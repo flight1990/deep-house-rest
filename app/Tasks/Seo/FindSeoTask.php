@@ -2,13 +2,13 @@
 
 namespace App\Tasks\Seo;
 
-use App\Repositories\Contracts\SeoRepositoryInterface;
+use App\L5Repository\SeoRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class FindSeoTask
 {
     public function __construct(
-        protected SeoRepositoryInterface $repository
+        protected SeoRepository $repository
     )
     {
     }
@@ -16,9 +16,9 @@ class FindSeoTask
     public function run(int|string $identifier): Model
     {
         if (is_numeric($identifier)) {
-            return $this->repository->findById($identifier);
+            return $this->repository->find($identifier);
         }
 
-        return  $this->repository->findByUrl($identifier);
+        return  $this->repository->findByField('url', $identifier);
     }
 }

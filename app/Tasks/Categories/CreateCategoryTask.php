@@ -2,13 +2,13 @@
 
 namespace App\Tasks\Categories;
 
-use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\L5Repository\CategoryRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class CreateCategoryTask
 {
     public function __construct(
-        protected CategoryRepositoryInterface $repository
+        protected CategoryRepository $repository
     )
     {
     }

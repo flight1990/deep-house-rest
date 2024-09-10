@@ -2,12 +2,12 @@
 
 namespace App\Tasks\Menu;
 
-use App\Repositories\Contracts\MenuRepositoryInterface;
+use App\L5Repository\MenuRepository;
 
 class DeleteMenuTask
 {
     public function __construct(
-        protected MenuRepositoryInterface $repository
+        protected MenuRepository $repository
     )
     {
     }

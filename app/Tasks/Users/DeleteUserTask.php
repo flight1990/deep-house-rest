@@ -2,12 +2,12 @@
 
 namespace App\Tasks\Users;
 
-use App\Repositories\Contracts\UserRepositoryInterface;
+use App\L5Repository\UserRepository;
 
 class DeleteUserTask
 {
     public function __construct(
-        protected UserRepositoryInterface $repository
+        protected UserRepository $repository
     )
     {
     }

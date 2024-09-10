@@ -2,13 +2,13 @@
 
 namespace App\Tasks\Products;
 
-use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\L5Repository\ProductRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class FindProductTask
 {
     public function __construct(
-        protected ProductRepositoryInterface $repository
+        protected ProductRepository $repository
     )
     {
     }
@@ -16,9 +16,9 @@ class FindProductTask
     public function run(int|string $identifier): Model
     {
         if (is_numeric($identifier)) {
-            return $this->repository->findById($identifier);
+            return $this->repository->find($identifier);
         }
 
-        return $this->repository->findBySlug($identifier);
+        return $this->repository->findByField('slug', $identifier);
     }
 }

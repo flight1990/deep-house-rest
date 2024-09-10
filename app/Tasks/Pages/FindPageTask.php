@@ -2,13 +2,13 @@
 
 namespace App\Tasks\Pages;
 
-use App\Repositories\Contracts\PageRepositoryInterface;
+use App\L5Repository\PageRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class FindPageTask
 {
     public function __construct(
-        protected PageRepositoryInterface $repository
+        protected PageRepository $repository
     )
     {
     }
@@ -16,9 +16,9 @@ class FindPageTask
     public function run(int|string $identifier): Model|null
     {
         if (is_numeric($identifier)) {
-            return $this->repository->findById($identifier);
+            return $this->repository->find($identifier);
         }
 
-        return $this->repository->findBySlug($identifier);
+        return $this->repository->findByField('slug', $identifier);
     }
 }

@@ -2,19 +2,26 @@
 
 namespace App\Tasks\Categories;
 
-use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Criteria\WhereNotInCriteriaCriteria;
+use App\L5Repository\CategoryRepository;
 use Illuminate\Database\Eloquent\Collection;
 
 class GetCategoriesTask
 {
     public function __construct(
-        protected CategoryRepositoryInterface $repository
+        protected CategoryRepository $repository
     )
     {
     }
 
-    public function run(int $id = null): Collection
+    public function run(): Collection
     {
-        return $this->repository->all($id);
+        return $this->repository->all();
+    }
+
+    public function byExceptId(?array $data = []): self
+    {
+        $this->repository->pushCriteria(new WhereNotInCriteriaCriteria('id', $data));
+        return $this;
     }
 }

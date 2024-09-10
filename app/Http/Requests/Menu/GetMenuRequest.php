@@ -14,7 +14,8 @@ class GetMenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-
+            'except' => ['sometimes', 'array'],
+            'search' => ['sometimes', 'string'],
         ];
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Tasks\Reviews;
 
-use App\Repositories\Contracts\ReviewRepositoryInterface;
+use App\L5Repository\ReviewRepository;
 
 class DeleteReviewTask
 {
     public function __construct(
-        protected ReviewRepositoryInterface $repository
+        protected ReviewRepository $repository
     )
     {
     }

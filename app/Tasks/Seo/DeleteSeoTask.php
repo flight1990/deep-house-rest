@@ -2,12 +2,12 @@
 
 namespace App\Tasks\Seo;
 
-use App\Repositories\Contracts\SeoRepositoryInterface;
+use App\L5Repository\SeoRepository;
 
 class DeleteSeoTask
 {
     public function __construct(
-        protected SeoRepositoryInterface $repository
+        protected SeoRepository $repository
     )
     {
     }

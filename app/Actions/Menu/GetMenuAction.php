@@ -13,9 +13,11 @@ class GetMenuAction
     {
     }
 
-    public function run(array $params = []): Collection
+    public function run(?array $params = []): Collection
     {
-        return $this->getMenuTask->run($params['id'] ?? null)
+        return $this->getMenuTask
+            ->byExceptId($params['except'] ?? [])
+            ->run()
             ->toTree();
     }
 }

@@ -2,19 +2,19 @@
 
 namespace App\Tasks\Users;
 
-use App\Repositories\Contracts\UserRepositoryInterface;
+use App\L5Repository\UserRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class FindUserTask
 {
     public function __construct(
-        protected UserRepositoryInterface $repository
+        protected UserRepository $repository
     )
     {
     }
 
     public function run(int $id): Model|null
     {
-        return $this->repository->findById($id);
+        return $this->repository->find($id);
     }
 }

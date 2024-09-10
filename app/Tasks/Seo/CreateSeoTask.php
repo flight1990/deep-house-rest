@@ -2,13 +2,13 @@
 
 namespace App\Tasks\Seo;
 
-use App\Repositories\Contracts\SeoRepositoryInterface;
+use App\L5Repository\SeoRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class CreateSeoTask
 {
     public function __construct(
-        protected SeoRepositoryInterface $repository
+        protected SeoRepository $repository
     )
     {
     }

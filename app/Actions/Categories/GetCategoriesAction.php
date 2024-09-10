@@ -13,9 +13,11 @@ class GetCategoriesAction
     {
     }
 
-    public function run(array $params = []): Collection
+    public function run(?array $params = []): Collection
     {
-        return $this->getCategoriesTask->run($params['id'] ?? null)
+        return $this->getCategoriesTask
+            ->byExceptId($params['except'] ?? [])
+            ->run()
             ->toTree();
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Tasks\Pages;
 
-use App\Repositories\Contracts\PageRepositoryInterface;
+use App\L5Repository\PageRepository;
 
 class DeletePageTask
 {
     public function __construct(
-        protected PageRepositoryInterface $repository
+        protected PageRepository $repository
     )
     {
     }

@@ -14,6 +14,7 @@ class GetPagesRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'search' => ['sometimes', 'string'],
             'page' => ['sometimes', 'integer', 'min:1'],
             'limit' => ['sometimes', 'integer', 'min:1', 'max:200']
         ];

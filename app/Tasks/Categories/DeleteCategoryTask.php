@@ -2,12 +2,12 @@
 
 namespace App\Tasks\Categories;
 
-use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\L5Repository\CategoryRepository;
 
 class DeleteCategoryTask
 {
     public function __construct(
-        protected CategoryRepositoryInterface $repository
+        protected CategoryRepository $repository
     )
     {
     }

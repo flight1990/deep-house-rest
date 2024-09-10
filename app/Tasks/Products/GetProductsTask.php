@@ -2,13 +2,13 @@
 
 namespace App\Tasks\Products;
 
-use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\L5Repository\ProductRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class GetProductsTask
 {
     public function __construct(
-        protected ProductRepositoryInterface $repository
+        protected ProductRepository $repository
     )
     {
     }

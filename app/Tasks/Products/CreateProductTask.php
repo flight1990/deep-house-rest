@@ -2,13 +2,13 @@
 
 namespace App\Tasks\Products;
 
-use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\L5Repository\ProductRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class CreateProductTask
 {
     public function __construct(
-        protected ProductRepositoryInterface $repository
+        protected ProductRepository $repository
     )
     {
     }

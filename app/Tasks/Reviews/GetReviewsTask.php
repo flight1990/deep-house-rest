@@ -2,13 +2,13 @@
 
 namespace App\Tasks\Reviews;
 
-use App\Repositories\Contracts\ReviewRepositoryInterface;
+use App\L5Repository\ReviewRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class GetReviewsTask
 {
     public function __construct(
-        protected ReviewRepositoryInterface $repository
+        protected ReviewRepository $repository
     )
     {
     }

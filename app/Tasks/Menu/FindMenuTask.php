@@ -2,19 +2,19 @@
 
 namespace App\Tasks\Menu;
 
-use App\Repositories\Contracts\MenuRepositoryInterface;
+use App\L5Repository\MenuRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class FindMenuTask
 {
     public function __construct(
-        protected MenuRepositoryInterface $repository
+        protected MenuRepository $repository
     )
     {
     }
 
     public function run(int $id): Model
     {
-        return $this->repository->findById($id);
+        return $this->repository->find($id);
     }
 }

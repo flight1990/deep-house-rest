@@ -2,13 +2,13 @@
 
 namespace App\Tasks\Users;
 
-use App\Repositories\Contracts\UserRepositoryInterface;
+use App\L5Repository\UserRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class UpdateUserTask
 {
     public function __construct(
-        protected UserRepositoryInterface $repository
+        protected UserRepository $repository
     )
     {
     }

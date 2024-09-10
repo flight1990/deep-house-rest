@@ -2,13 +2,13 @@
 
 namespace App\Tasks\Reviews;
 
-use App\Repositories\Contracts\ReviewRepositoryInterface;
+use App\L5Repository\ReviewRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class CreateReviewTask
 {
     public function __construct(
-        protected ReviewRepositoryInterface $repository
+        protected ReviewRepository $repository
     )
     {
     }

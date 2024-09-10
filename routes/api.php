@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\SeoController as AdminSeoController;
 
+use App\Http\Controllers\Guest\ReviewController as GuestReviewController;
 use App\Http\Controllers\Guest\CategoryController as GuestCategoryController;
 use App\Http\Controllers\Guest\PageController as GuestPageController;
 use App\Http\Controllers\Guest\MenuController as GuestMenuController;
@@ -41,6 +42,11 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('menu', AdminMenuController::class);
         Route::apiResource('products', AdminProductController::class);
         Route::apiResource('seo', AdminSeoController::class);
+    });
+
+    Route::controller(GuestReviewController::class)->prefix('reviews')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'store');
     });
 
     Route::controller(GuestCategoryController::class)->prefix('categories')->group(function () {

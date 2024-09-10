@@ -13,7 +13,9 @@ class ReviewFactory extends Factory
         return [
             'title' => $this->faker->words(rand(3,5), true),
             'message' => $this->faker->realText(750),
-            'user_id' => User::query()->inRandomOrder()->value('id'),
+            'name' => $this->faker->name,
+            'email' => $this->faker->email,
+            'phone' => $this->faker->phoneNumber,
             'product_id' => Product::query()->inRandomOrder()->value('id')
         ];
     }

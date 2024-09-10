@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('message');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('product_id')->nullable()->constrained();
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });

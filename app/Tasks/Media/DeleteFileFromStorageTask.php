@@ -8,6 +8,6 @@ class DeleteFileFromStorageTask
 {
     public function run($path): bool
     {
-        return Storage::disk('public')->delete($path);
+        return Storage::disk(env('FILESYSTEM_DISK'))->delete($path);
     }
 }

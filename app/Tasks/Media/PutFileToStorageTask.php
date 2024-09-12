@@ -11,7 +11,7 @@ class PutFileToStorageTask
         return [
             'file_name' => $file->getClientOriginalName(),
             'file_extension' => $file->getClientOriginalExtension(),
-            'file_path' => Storage::disk('public')->put('media', $file)
+            'file_path' => Storage::disk(env('FILESYSTEM_DISK'))->put('media', $file)
         ];
     }
 }

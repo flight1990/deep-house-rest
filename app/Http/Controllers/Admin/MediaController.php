@@ -29,7 +29,7 @@ class MediaController extends BaseController
         return $this->respondWithSuccess(MediaResource::collection($data));
     }
 
-    public function store(CreateMediaRequest $request): JsonResource
+    public function store(CreateMediaRequest $request)
     {
         $data = $this->createMediaAction->run($request->validated());
         return $this->respondWithSuccessCreate(new MediaResource($data));

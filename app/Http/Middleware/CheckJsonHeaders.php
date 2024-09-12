@@ -14,10 +14,15 @@ class CheckJsonHeaders
             return response()->json(['error' => 'Invalid Accept header'], 406);
         }
 
-        if (($request->method() !== 'GET' && $request->method() !== 'DELETE') && (!$request->headers->has('Content-Type') || $request->header('Content-Type') !== 'application/json')) {
-            return response()->json(['error' => 'Invalid Content-Type header'], 415);
+        if (!in_array($request->method(), ['GET', 'DELETE'])) {
+            $contentType = $request->header('Content-Type');
+
+            if (!$contentType || (!str_contains($contentType, 'application/json') && !str_contains($contentType, 'multipart/form-data'))) {
+                return response()->json(['error' => 'Invalid Content-Type header'], 415);
+            }
         }
 
         return $next($request);
     }
 }
+

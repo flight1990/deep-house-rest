@@ -14,7 +14,7 @@ class CreateMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['required', 'file']
+            'file' => ['required', 'file', 'mimes:jpeg,png,jpg,gif']
         ];
     }
 }

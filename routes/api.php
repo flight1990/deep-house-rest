@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MediaController as AdminMediaController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
@@ -35,6 +36,7 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('admin')->group(function () {
+        Route::apiResource('media', AdminMediaController::class)->only(['index', 'store', 'destroy']);
         Route::apiResource('reviews', AdminReviewController::class);
         Route::apiResource('categories', AdminCategoryController::class);
         Route::apiResource('pages', AdminPageController::class);
@@ -44,27 +46,9 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('seo', AdminSeoController::class);
     });
 
-    Route::controller(GuestReviewController::class)->prefix('reviews')->group(function () {
-        Route::get('/', 'index');
-        Route::post('/', 'store');
-    });
-
-    Route::controller(GuestCategoryController::class)->prefix('categories')->group(function () {
-        Route::get('/', 'index');
-        Route::get('/{slug}', 'show');
-    });
-
-    Route::controller(GuestPageController::class)->prefix('pages')->group(function () {
-        Route::get('/', 'index');
-        Route::get('/{slug}', 'show');
-    });
-
-    Route::controller(GuestMenuController::class)->prefix('menu')->group(function () {
-        Route::get('/', 'index');
-    });
-
-    Route::controller(GuestProductController::class)->prefix('products')->group(function () {
-        Route::get('/', 'index');
-        Route::get('/{slug}', 'show');
-    });
+    Route::apiResource('reviews', GuestReviewController::class)->only(['index', 'show']);
+    Route::apiResource('categories', GuestCategoryController::class)->only(['index', 'show']);
+    Route::apiResource('pages', GuestPageController::class)->only(['index', 'show']);
+    Route::apiResource('menu', GuestMenuController::class)->only(['index']);
+    Route::apiResource('products', GuestProductController::class)->only(['index', 'show']);
 });

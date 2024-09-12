@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Menu;
+namespace App\Http\Requests\Media;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GetMenuRequest extends FormRequest
+class CreateMediaRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,8 +14,7 @@ class GetMenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'notIn' => ['sometimes', 'array'],
-            'search' => ['sometimes', 'string'],
+            'file' => ['required', 'file']
         ];
     }
 }

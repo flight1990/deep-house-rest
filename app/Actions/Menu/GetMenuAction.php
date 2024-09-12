@@ -16,7 +16,7 @@ class GetMenuAction
     public function run(?array $params = []): Collection
     {
         return $this->getMenuTask
-            ->byExceptId($params['except'] ?? [])
+            ->byNotInId($params['notIn'] ?? [])
             ->run()
             ->toTree();
     }

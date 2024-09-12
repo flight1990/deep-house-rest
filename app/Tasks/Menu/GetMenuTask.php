@@ -19,7 +19,7 @@ class GetMenuTask
         return $this->repository->all();
     }
 
-    public function byExceptId(?array $data = []): self
+    public function byNotInId(?array $data = []): self
     {
         $this->repository->pushCriteria(new WhereNotInCriteria('id', $data));
         return $this;

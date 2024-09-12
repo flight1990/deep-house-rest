@@ -14,7 +14,7 @@ class GetCategoriesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'except' => ['sometimes', 'array'],
+            'notIn' => ['sometimes', 'array'],
             'search' => ['sometimes', 'string'],
         ];
     }

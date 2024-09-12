@@ -16,7 +16,7 @@ class GetCategoriesAction
     public function run(?array $params = []): Collection
     {
         return $this->getCategoriesTask
-            ->byExceptId($params['except'] ?? [])
+            ->byNotInId($params['notIn'] ?? [])
             ->run()
             ->toTree();
     }

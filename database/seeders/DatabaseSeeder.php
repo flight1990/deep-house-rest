@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            MediaSeeder::class,
             UserSeeder::class,
             CategorySeeder::class,
             ProductSeeder::class,
@@ -18,7 +19,6 @@ class DatabaseSeeder extends Seeder
             SeoSeeder::class,
             ProductSeeder::class,
             ReviewSeeder::class,
-            MediaSeeder::class,
             CarouselSeeder::class
         ]);
     }

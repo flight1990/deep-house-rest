@@ -18,7 +18,8 @@ class ProductResource extends JsonResource
             'description' => $this->whenHas('description'),
             'price' => $this->whenHas('price'),
             'category_id' => $this->whenHas('category_id'),
-            'category' => new CategoryResource($this->whenLoaded('category'))
+            'category' => new CategoryResource($this->whenLoaded('category')),
+            'photos' => MediaResource::collection($this->whenLoaded('photos'))
         ];
     }
 }

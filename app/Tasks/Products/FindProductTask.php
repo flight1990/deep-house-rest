@@ -16,6 +16,10 @@ class FindProductTask
 
     public function run(int|string $identifier): Model
     {
+        $this->repository
+            ->with(['category', 'photos']);
+
+
         if (is_numeric($identifier)) {
             return $this->repository->find($identifier);
         }

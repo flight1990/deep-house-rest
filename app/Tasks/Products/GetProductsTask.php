@@ -15,6 +15,8 @@ class GetProductsTask
 
     public function run(int $limit = 15): LengthAwarePaginator
     {
-        return $this->repository->paginate($limit);
+        return $this->repository
+            ->with(['category', 'photos'])
+            ->paginate($limit);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CarouselController as AdminCarouselController;
 use App\Http\Controllers\Admin\MediaController as AdminMediaController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\SeoController as AdminSeoController;
 
+use App\Http\Controllers\Guest\CarouselController as GuestCarouselController;
 use App\Http\Controllers\Guest\ReviewController as GuestReviewController;
 use App\Http\Controllers\Guest\CategoryController as GuestCategoryController;
 use App\Http\Controllers\Guest\PageController as GuestPageController;
@@ -36,6 +38,7 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('admin')->group(function () {
+        Route::apiResource('carousels', AdminCarouselController::class);
         Route::apiResource('media', AdminMediaController::class)->only(['index', 'store', 'destroy']);
         Route::apiResource('reviews', AdminReviewController::class);
         Route::apiResource('categories', AdminCategoryController::class);
@@ -46,6 +49,7 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('seo', AdminSeoController::class);
     });
 
+    Route::apiResource('carousels', GuestCarouselController::class)->only(['index']);
     Route::apiResource('reviews', GuestReviewController::class)->only(['index', 'show']);
     Route::apiResource('categories', GuestCategoryController::class)->only(['index', 'show']);
     Route::apiResource('pages', GuestPageController::class)->only(['index', 'show']);

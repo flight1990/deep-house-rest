@@ -2,8 +2,6 @@
 
 namespace App\Containers\Auth\Controllers;
 
-use App\Containers\Reviews\Actions\CreateReviewAction;
-use App\Containers\Reviews\Requests\CreateReviewRequest;
 use App\Containers\Users\Actions\CreateTokenAction;
 use App\Containers\Users\Actions\CreateUserAction;
 use App\Containers\Users\Requests\CreateUserRequest;

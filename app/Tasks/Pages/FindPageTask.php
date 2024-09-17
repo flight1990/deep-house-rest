@@ -17,7 +17,7 @@ class FindPageTask
     public function run(int|string $identifier): Model|null
     {
         if (is_numeric($identifier)) {
-            return $this->repository->find($identifier);
+            return $this->repository->findOrFail($identifier);
         }
 
         return $this->repository

@@ -15,6 +15,6 @@ class FindUserTask
 
     public function run(int $id): Model|null
     {
-        return $this->repository->find($id);
+        return $this->repository->findOrFail($id);
     }
 }

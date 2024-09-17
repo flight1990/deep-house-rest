@@ -17,7 +17,7 @@ class FindCategoryTask
     public function run(int|string $identifier): Model
     {
         if (is_numeric($identifier)) {
-            return $this->repository->find($identifier);
+            return $this->repository->findOrFail($identifier);
         }
 
         return $this->repository

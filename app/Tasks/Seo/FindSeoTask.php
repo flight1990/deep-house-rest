@@ -2,6 +2,7 @@
 
 namespace App\Tasks\Seo;
 
+use App\Criteria\WhereFieldCriteria;
 use App\L5Repository\SeoRepository;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,9 +17,11 @@ class FindSeoTask
     public function run(int|string $identifier): Model
     {
         if (is_numeric($identifier)) {
-            return $this->repository->find($identifier);
+            return $this->repository->findOrFail($identifier);
         }
 
-        return  $this->repository->findByField('url', $identifier);
+        return  $this->repository
+            ->pushCriteria(new WhereFieldCriteria('url', $identifier))
+            ->firstOrFail();
     }
 }

@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             SeoSeeder::class,
             ProductSeeder::class,
             ReviewSeeder::class,
-            CarouselSeeder::class
+            CarouselSeeder::class,
+            FaqSeeder::class
         ]);
     }
 }

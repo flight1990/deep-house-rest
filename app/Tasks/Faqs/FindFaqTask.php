@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tasks\Menu;
+namespace App\Tasks\Faqs;
 
-use App\L5Repository\MenuRepository;
+use App\L5Repository\FaqRepository;
 use Illuminate\Database\Eloquent\Model;
 
-class FindMenuTask
+class FindFaqTask
 {
     public function __construct(
-        protected MenuRepository $repository
+        protected FaqRepository $repository
     )
     {
     }

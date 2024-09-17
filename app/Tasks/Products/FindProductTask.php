@@ -21,7 +21,7 @@ class FindProductTask
 
 
         if (is_numeric($identifier)) {
-            return $this->repository->find($identifier);
+            return $this->repository->findOrFail($identifier);
         }
 
         return $this->repository
